@@ -1,7 +1,7 @@
 import sqlite3
 
 conn = sqlite3.connect("class_attendance_db" )
- 
+""" 
 conn.execute('''CREATE TABLE students
        (id 			INTEGER 	PRIMARY KEY AUTOINCREMENT  NOT NULL,
        first_name   TEXT 	NOT NULL,
@@ -13,7 +13,7 @@ conn.execute('''CREATE TABLE classes
        subject		TEXT 	NOT NULL,
        teacher    	TEXT   	NOT NULL );''')
 
-
+"""
 #function to insert students into the database
 def database_insert_student(first_name, last_name):
 	sql = "INSERT INTO students(first_name, last_name) VALUES ('{}', '{}')".format(first_name, last_name)
@@ -65,3 +65,5 @@ def database_return_classes():
 	cursor = conn.execute("SELECT * FROM classes")
 	new = cursor.fetchall()
 	return new
+
+print(database_return_classes())
