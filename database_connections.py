@@ -13,6 +13,13 @@ conn.execute('''CREATE TABLE classes
        subject		TEXT 	NOT NULL,
        teacher    	TEXT   	NOT NULL );''')
 
+conn.execute('''CREATE TABLE reasons
+       (id 			INTEGER 	PRIMARY KEY  AUTOINCREMENT  NOT NULL,
+       student_id	TEXT 	NOT NULL,
+       class_id		TEXT 	NOT NULL,
+       day			TEXT	NOT NULL,
+       reason    	TEXT   	NOT NULL );''')
+
 """
 #function to insert students into the database
 def database_insert_student(first_name, last_name):
@@ -33,6 +40,15 @@ def database_insert_class(name, subject, teacher):
 	except:
 		conn.rollback()
 	#conn.close()
+
+#function to enter reasons for student's checkout
+def database_insert_reason(student_id, class_id, day, reason):
+	sql = "INSERT INTO classes(student_id, class_id, day, reason) VALUES ('{}', '{}', '{}')".format(student_id, class_id, day, reason)
+	try:
+		conn.execute(sql)
+		conn.commit()
+	except:
+		conn.rollback()
 
 #function to delete student from the database
 def database_delete_student(student_id):

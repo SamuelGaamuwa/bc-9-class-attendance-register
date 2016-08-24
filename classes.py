@@ -14,15 +14,16 @@ class Class(object):
 		self.teacher = teacher
 		self.subject = subject
 
+	#method to push class parameters to the database
 	def register_class(self):
-	#push class parameters to the database
 		database_insert_class(self.name, self.subject, self.teacher)
 
+	#method to delete class parameters from the database
 	@staticmethod
 	def delete_class(class_id):
-	#delete class parameters from the database
 		database_delete_class(class_id)
 
+	#method to list all the classes in the database
 	@staticmethod
 	def list_all_classes():
 		class_list = database_return_classes()
