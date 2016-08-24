@@ -19,8 +19,8 @@ conn.execute('''CREATE TABLE reasons
        class_id		TEXT 	NOT NULL,
        day			TEXT	NOT NULL,
        reason    	TEXT   	NOT NULL );''')
-
 """
+
 #function to insert students into the database
 def database_insert_student(first_name, last_name):
 	sql = "INSERT INTO students(first_name, last_name) VALUES ('{}', '{}')".format(first_name, last_name)
@@ -43,7 +43,7 @@ def database_insert_class(name, subject, teacher):
 
 #function to enter reasons for student's checkout
 def database_insert_reason(student_id, class_id, day, reason):
-	sql = "INSERT INTO classes(student_id, class_id, day, reason) VALUES ('{}', '{}', '{}')".format(student_id, class_id, day, reason)
+	sql = "INSERT INTO reasons(student_id, class_id, day, reason) VALUES ('{}', '{}', '{}', '{}')".format(student_id, class_id, day, reason)
 	try:
 		conn.execute(sql)
 		conn.commit()
@@ -82,4 +82,10 @@ def database_return_classes():
 	new = cursor.fetchall()
 	return new
 
-print(database_return_classes())
+#function to return the reasons for leaving class 
+def database_return_reasons():
+	cursor = conn.execute("SELECT * FROM reasons")
+	new = cursor.fetchall()
+	return new
+
+
