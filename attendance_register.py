@@ -7,6 +7,8 @@ from database_connections import database_delete_ongoing
 from database_connections import database_insert_inclass
 from database_connections import database_return_inclass
 from database_connections import database_delete_inclass
+from database_connections import database_return_classes
+from database_connections import database_return_students
 
 class AttendanceRegister(object):
 	attending_list = []
@@ -23,8 +25,12 @@ class AttendanceRegister(object):
 		time = datetime.now()
 		if class_id in database_return_ongoing():
 			return "Class already logged in"
-		database_insert_ongoing(class_id, time)
-		return "Class of id: {}, logged in".format(class_id)
+		for dataset in database_return_classes():
+			if class_id in dataset:
+				print(class_id)
+				database_insert_ongoing(class_id, time)
+				return "Class of id: {}, logged in".format(class_id)
+		return "Class not created yet"
 		
 	@staticmethod
 	def log_end(class_id):
@@ -40,8 +46,12 @@ class AttendanceRegister(object):
 	#method to check student into a particular class
 		if student_id in database_return_inclass():
 			return "Student already attending class"
-		database_insert_inclass(student_id, class_id)
-		return "Student ID: {} checked into class ID: {}".format(student_id, class_id)
+		for dataset in database_return_students():
+			if student_id in dataset:
+				print(student_id)
+				database_insert_inclass(student_id, class_id)
+				return "Student ID: {} checked into class ID: {}".format(student_id, class_id)
+		return "Student not created yet"
 
  
 	@staticmethod

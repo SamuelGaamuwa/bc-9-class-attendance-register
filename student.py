@@ -1,6 +1,7 @@
 from database_connections import database_insert_student
 from database_connections import database_return_students
 from database_connections import database_delete_student
+from database_connections import database_return_inclass
 
 
 class Student(object):
@@ -23,11 +24,12 @@ class Student(object):
 
 	@staticmethod
 	def list_students():
-	#method to list all students in the database
-		student_list = database_return_students()
-		print("{} {} {}".format('Student Id'.ljust(15), 'First Name'.ljust(20), 'Last Name'.ljust(20)))
-		print("=" * 50 )
-		for row in student_list:
-			print("{} {} {}".format(str(row[0]).ljust(15), row[1].ljust(20), row[2].ljust(20)))
-		
-		
+	#method to list all students in the database 
+		print("{} {} {} {}".format('Student Id'.ljust(15), 'First Name'.ljust(20), 'Last Name'.ljust(20), 'Status'.ljust(15)))
+		print("=" * 75 )
+		for row in database_return_students():
+			status = 'Not In Class'
+			if row[0] in database_return_inclass():
+				status = 'In Class'
+			print("{} {} {} {}".format(str(row[0]).ljust(15), row[1].ljust(20), row[2].ljust(20), status.ljust(15)))
+				

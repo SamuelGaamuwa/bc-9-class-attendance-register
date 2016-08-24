@@ -133,13 +133,23 @@ def database_return_ongoing():
 
 def database_return_inclass():
 #function to return students in class from the database
-	cursor = conn.execute("SELECT student_id FROM inclass")
+	cursor = conn.execute("SELECT * FROM inclass")
 	new = cursor.fetchall()
 	#return new
 	value_list = []
 	for num in range(len(new)):
 		value_list.append(new[num][0])
 	return value_list
+
+def database_students_per_class(class_id):
+#function to return students that are in a given class 
+	cursor = conn.execute("SELECT * FROM inclass")
+	new = cursor.fetchall()
+	count = 0
+	for num in range(len(new)):
+		if class_id == new[num][1]:
+			count = count + 1
+	return count
 
 def database_return_classes():
 #function to return classes from the database
@@ -153,5 +163,4 @@ def database_return_reasons():
 	new = cursor.fetchall()
 	return new
 
-#print(database_return_reasons())
-print(database_return_inclass())
+print(database_return_ongoing())
