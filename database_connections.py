@@ -106,9 +106,9 @@ def database_delete_ongoing(class_id):
 		conn.rollback()
 	#conn.close()
 
-def database_delete_inclass(student_id):
+def database_delete_inclass(student_id, class_id):
 #function to delete students in class from the database
-	sql = "DELETE FROM inclass WHERE student_id = {};".format( str(student_id))
+	sql = "DELETE FROM inclass WHERE student_id = {} AND class_id = {};".format( str(student_id), str(class_id))
 	try:
 		conn.execute(sql)
 		conn.commit()
@@ -153,4 +153,5 @@ def database_return_reasons():
 	new = cursor.fetchall()
 	return new
 
-#print(database_return_inclass())
+#print(database_return_reasons())
+print(database_return_inclass())

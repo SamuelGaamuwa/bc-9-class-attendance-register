@@ -2,12 +2,14 @@ from student import Student
 from classes import Class
 from attendance_register import AttendanceRegister
 import click
+
 """
 	This is the Class Attendance Register, providing users with the ability to 
 	create classes and students, delete classes and students, list the classes 
 	and students in the database. It also checks students in and out of classes, 
 	as well as logging the start and end of the various classes
 """
+
 @click.group()
 def cli():
 	pass
@@ -58,7 +60,7 @@ def log(start, end):
 
 @cli.command()
 @click.option('--into', nargs = 2, type = int, help = "checks a student into a class using the respective IDs <studentID> <classID>")
-@click.option('--out', nargs = 3, type = int, help = "checks a student out of a class using IDs and takes a reason <studentID> <classID> <reason>")
+@click.option('--out', nargs = 3, help = "checks a student out of a class using IDs and takes a reason <studentID> <classID> <reason>")
 def check(into, out):
 #function to check students in and out of classes
 	if len(into) != 0:

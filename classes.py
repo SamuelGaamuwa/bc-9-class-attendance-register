@@ -14,18 +14,18 @@ class Class(object):
 		self.teacher = teacher
 		self.subject = subject
 
-	#method to push class parameters to the database
 	def register_class(self):
+	#method to push class parameters to the database
 		database_insert_class(self.name, self.subject, self.teacher)
 
-	#method to delete class parameters from the database
 	@staticmethod
 	def delete_class(class_id):
+	#method to delete class parameters from the database
 		database_delete_class(class_id)
 
-	#method to list all the classes in the database
 	@staticmethod
 	def list_all_classes():
+	#method to list all the classes in the database
 		class_list = database_return_classes()
 		print("{} {} {}".format('Class Id'.ljust(15), 'Name'.ljust(20), 'Subject'.ljust(20), 'Teacher'.ljust(20)))
 		print("=" * 50 )

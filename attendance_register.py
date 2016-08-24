@@ -48,10 +48,14 @@ class AttendanceRegister(object):
 	#method to check out student from a class
 	def check_out(student_id, class_id, reason):
 		day = datetime.now()
-		if student_id in database_return_inclass():
-			database_delete_inclass(student_id)
-			#database_insert_reason(student_id, class_id, day, reason)
-			return "Student ID: {} has been checked out".format(student_id)
+		s_id = student_id
+		c_id = class_id
+		rea = reason
+		for student in database_return_inclass():
+			if student_id == int(student):
+				database_delete_inclass(s_id, c_id)
+				database_insert_reason(s_id, c_id, day, rea)
+				return "Student ID: {} has been checked out".format(student_id)
 		return "Student not attending a class"
 
 	@staticmethod
@@ -59,3 +63,4 @@ class AttendanceRegister(object):
 		print(database_return_reasons())
 
 
+#print(AttendanceRegister.check_out(2, 3, "sick"))
