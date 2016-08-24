@@ -67,6 +67,15 @@ def database_insert_ongoing(class_id, ctime):
 	except:
 		conn.rollback()
 
+def database_insert_inclass(student_id, class_id):
+#function to insert data on students in class into the database
+	sql = "INSERT INTO inclass(class_id, student_id) VALUES ('{}', '{}')".format(class_id, student_id)
+	try:
+		conn.execute(sql)
+		conn.commit()
+	except:
+		conn.rollback()
+
 def database_delete_student(student_id):
 #function to delete student from the database
 	sql = "DELETE FROM students WHERE id = {};".format( str(student_id))
@@ -88,8 +97,18 @@ def database_delete_class(class_id):
 	#conn.close()
 
 def database_delete_ongoing(class_id):
-#function to delete class from the database
+#function to delete ongoing classes from the database
 	sql = "DELETE FROM ongoing WHERE class_id = {};".format( str(class_id))
+	try:
+		conn.execute(sql)
+		conn.commit()
+	except:
+		conn.rollback()
+	#conn.close()
+
+def database_delete_inclass(student_id):
+#function to delete students in class from the database
+	sql = "DELETE FROM inclass WHERE student_id = {};".format( str(student_id))
 	try:
 		conn.execute(sql)
 		conn.commit()
@@ -104,11 +123,21 @@ def database_return_students():
 	return new
 
 def database_return_ongoing():
-#function to return students from the database
+#function to return ongoing classes from the database
 	cursor = conn.execute("SELECT class_id FROM ongoing")
 	new = cursor.fetchall()
 	value_list = []
-	for num in range(len(new) - 1):
+	for num in range(len(new) ):
+		value_list.append(new[num][0])
+	return value_list
+
+def database_return_inclass():
+#function to return students in class from the database
+	cursor = conn.execute("SELECT student_id FROM inclass")
+	new = cursor.fetchall()
+	#return new
+	value_list = []
+	for num in range(len(new)):
 		value_list.append(new[num][0])
 	return value_list
 
@@ -124,3 +153,4 @@ def database_return_reasons():
 	new = cursor.fetchall()
 	return new
 
+#print(database_return_inclass())
