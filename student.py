@@ -6,7 +6,7 @@ from database_connections import database_return_inclass
 
 class Student(object):
 	"""
-		This is the student class, it is supposed to take care of student operations,
+		This is the student class, it takes care of student operations,
 		like registering the student and deleting students
 	"""
 	def __init__(self, first_name, last_name):
@@ -14,17 +14,14 @@ class Student(object):
 		self.last_name = last_name
 
 	def register_student(self):
-	#send the information collected to the database
 		database_insert_student(self.first_name, self.last_name)
 
 	@staticmethod
 	def delete_student(student_id):
-	#pass information of student to be deleted from the database
 		database_delete_student(student_id)
 
 	@staticmethod
 	def list_students():
-	#method to list all students in the database 
 		print("{} {} {} {}".format('Student Id'.ljust(15), 'First Name'.ljust(20), 'Last Name'.ljust(20), 'Status'.ljust(15)))
 		print("=" * 75 )
 		for row in database_return_students():

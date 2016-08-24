@@ -1,5 +1,9 @@
 import sqlite3
 
+"""This is the database module and it houses all the connections to create 
+tables, insert data into the database, and to retrieve required data from the database
+"""
+
 conn = sqlite3.connect("class_attendance_db" )
 """
 conn.execute('''CREATE TABLE students
@@ -133,7 +137,7 @@ def database_return_ongoing():
 
 def database_return_inclass():
 #function to return students in class from the database
-	cursor = conn.execute("SELECT * FROM inclass")
+	cursor = conn.execute("SELECT student_id FROM inclass")
 	new = cursor.fetchall()
 	#return new
 	value_list = []
@@ -163,4 +167,4 @@ def database_return_reasons():
 	new = cursor.fetchall()
 	return new
 
-print(database_return_ongoing())
+print(database_return_inclass())

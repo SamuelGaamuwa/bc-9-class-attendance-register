@@ -1,4 +1,5 @@
 from datetime import datetime
+
 from database_connections import database_insert_reason
 from database_connections import database_return_reasons
 from database_connections import database_insert_ongoing
@@ -10,10 +11,11 @@ from database_connections import database_delete_inclass
 from database_connections import database_return_classes
 from database_connections import database_return_students
 
+"""This is the attendance register and it contains functions or methods
+to initiate and stop classes as well as checking students in and out of 
+classes. It also passes relevant data to database_connection module
+"""
 class AttendanceRegister(object):
-	attending_list = []
-	on_going_classes = []
-	class_students = []
 
 	def __init__():
 		pass
@@ -73,4 +75,4 @@ class AttendanceRegister(object):
 		print(database_return_reasons())
 
 
-#print(AttendanceRegister.check_out(2, 3, "sick"))
+#print(AttendanceRegister.check_out(2, 1, "sick"))
