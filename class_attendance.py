@@ -20,48 +20,62 @@ def cli():
 	pass
 
 @cli.command()
-@click.option('--add',  nargs=2 , type=str, help="Enter a student's <first name> and <last name> to add them")
-@click.option('--remove', type=int, help="Deletes a student from the database by their id <studentID>")
+@click.option('--add',  is_flag=True, help="Enter a student's <first name> and <last name> to add them")
+@click.option('--remove', is_flag=True, help="Deletes a student from the database by their id <studentID>")
 @click.option('--display', is_flag=True, help="Lists all the students in the database")
 def student(add, remove, display):
-	if len(add) != 0:
-		stu = Student(add[0], add[1])
+	if add:
+		first_name = input("Student's first name: ")
+		second_name = input("Student's last name: ")
+		stu = Student(first_name, second_name)
 		stu.register_student()
-	elif remove is not None:
-		print(Student.delete_student(remove))
+	elif remove:
+		student_id = input("Enter Student's Id: ")
+		print(Student.delete_student(student_id))
 	elif display:
 		Student.list_students()
 
 @cli.command()
-@click.option('--add', nargs=3, help="Enter class <name> <subject> <teacher> to add class")
-@click.option('--remove', type=int, help="Deletes a class from the database by its id <classID>")
+@click.option('--add', is_flag=True, help="Enter class <name> <subject> <teacher> to add class")
+@click.option('--remove', is_flag=True, help="Deletes a class from the database by its id <classID>")
 @click.option('--display', is_flag=True, help="Lists all the classes in the database")
 def classes(add, remove, display):
-	if len(add) != 0:
-		cla = Class(add[0], add[1], add[2])
+	if add:
+		class_name = input("Enter the Class Name: ")
+		subject = input("Enter the Class Subject: ")
+		teacher = input("Enter the Teacher's Name: ")
+		cla = Class(class_name, subject, teacher)
 		cla.register_class()
-	elif remove is not None:
-		Class.delete_class(remove) 
+	elif remove:
+		class_id = input("Enter Class' Id: ")
+		Class.delete_class(class_id) 
 	elif display:
 		Class.list_all_classes()
 
 @cli.command()
-@click.option('--start', type=int, help="Starts a class by its id <classID>")
-@click.option('--end', type=int, help="Ends a class by its id <classID>")
+@click.option('--start', is_flag=True, help="Starts a class by its id <classID>")
+@click.option('--end', is_flag=True, help="Ends a class by its id <classID>")
 def log(start, end):
-	if start is not None:
-		print(AttendanceRegister.log_start(start))
-	if end is not None:
-		print(AttendanceRegister.log_end(end))
+	if start:
+		class_id = input("Enter Class Id to start class: ")
+		print(AttendanceRegister.log_start(int(class_id)))
+	if end:
+		class_id = input("Enter Class Id to end class: ")
+		print(AttendanceRegister.log_end(int(class_id)))
 
 @cli.command()
-@click.option('--into', nargs=2, type=int, help="checks a student into a class using the respective IDs <studentID> <classID>")
-@click.option('--out', nargs=3, help="checks a student out of a class using IDs and takes a reason <studentID> <classID> <reason>")
+@click.option('--into', is_flag=True, help="checks a student into a class using the respective IDs <studentID> <classID>")
+@click.option('--out', is_flag=True, help="checks a student out of a class using IDs and takes a reason <studentID> <classID> <reason>")
 def check(into, out):
-	if len(into) != 0:
-		print(AttendanceRegister.check_in(into[0], into[1]))
-	if len(out) != 0:
-		print(AttendanceRegister.check_out(out[0], out[1], out[2]))
+	if into:
+		student_id = input("Enter the Student's id: ")
+		class_id = input("Enter the Class' id: ")
+		print(AttendanceRegister.check_in(int(student_id), int(class_id)))
+	if out:
+		student_id = input("Enter the Student's id: ")
+		class_id = input("Enter the Class' id: ")
+		reason = input("Enter a reason for check out: ")
+		print(AttendanceRegister.check_out(int(student_id), int(class_id), reason))
 
 @cli.command()
 @click.option('--display', is_flag=True, help="Lists all the students that were checked out of class and reasons why")

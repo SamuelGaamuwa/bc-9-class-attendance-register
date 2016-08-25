@@ -2,7 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
-from dbclass import Classes, Student, Reasons, Ongoing, Inclass
+from dbclass import Classes 
+from dbclass import Student 
+from dbclass import Reasons
+from dbclass import Ongoing
+from dbclass import Inclass
 
 engine = create_engine('sqlite:///class_attendance_db')
 
