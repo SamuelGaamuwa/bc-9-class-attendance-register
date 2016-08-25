@@ -53,5 +53,40 @@ def database_return_classes():
 		results.append((row.id, row.name, row.subject, row.teacher))
 	return results
 
-database_insert_student('samuel', 'gaamuwa')
-print(database_return_students())
+def database_return_ongoing():
+	results = []
+	rows = session.query(Ongoing).all()
+	for row in rows:
+		results.append(row.class_id)
+	return results
+
+def database_return_inclass():
+	results = []
+	rows = session.query(Inclass).all()
+	for row in rows:
+		results.append(row.student_id)
+	return results
+
+def database_return_reasons():
+	results = []
+	rows = session.query(Reasons).all()
+	for row in rows:
+		results.append((row.student_id, row.class_id, row.day, row.reason))
+	return results
+
+def database_delete_student(student_id):
+	session.query(Student).filter_by(id=student_id).delete()
+	session.commit()
+
+def database_delete_class(class_id):
+	session.query(Classes).filter_by(id=class_id).delete()
+	session.commit()
+
+def database_delete_ongoing(oclass_id):
+	session.query(Ongoing).filter_by(class_id=oclass_id).delete()
+	session.commit()
+
+def database_delete_inclass(istudent_id, iclass_id):
+	session.query(Inclass).filter_by(student_id=istudent_id, class_id=iclass_id).delete()
+	session.commit()
+
