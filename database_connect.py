@@ -101,5 +101,3 @@ def database_delete_inclass(istudent_id, iclass_id):
 def database_delete_class_students(sclass_id):
 	session.query(Inclass).filter_by(class_id=sclass_id).delete()
 	session.commit()
-
-print(database_return_inclass())

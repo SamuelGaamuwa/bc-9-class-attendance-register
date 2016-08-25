@@ -17,37 +17,32 @@ from attendance_register import AttendanceRegister
 
 @click.group()
 def cli():
-	print('this should work')
+	pass
 
 @cli.command()
-@click.option('--student', nargs=2 , type=str, help="Enter a student's first and last name to register them")
-@click.option('--clas', nargs=3, type=str, help="Enter the class' name, subject and teacher")
-def register(clas, student):
-	if len(student) != 0:
-		stu = Student(student[0], student[1])
+@click.option('--add',  nargs=2 , type=str, help="Enter a student's <first name> and <last name> to add them")
+@click.option('--remove', type=int, help="Deletes a student from the database by their id <studentID>")
+@click.option('--display', is_flag=True, help="Lists all the students in the database")
+def student(add, remove, display):
+	if len(add) != 0:
+		stu = Student(add[0], add[1])
 		stu.register_student()
-	elif len(clas) != 0:
-		cla = Class(clas[0], clas[1], clas[2])
-		cla.register_class()
-	else:
-		print ("Enter parameters correctly")
-
-@cli.command()
-@click.option('--student', type=int, help="Deletes a student from the database by their id <studentID>")
-@click.option('--clas', type=int, help="Deletes a class from the database by its id <classID>")
-def delete(clas, student):
-	if student is not None:
-		Student.delete_student(student)
-	elif clas is not None:
-		Class.delete_class(clas) 
-
-@cli.command()
-@click.option('--students', is_flag=True, help="Lists all the students in the database")
-@click.option('--classes', is_flag=True, help="Lists all the classes in the database")
-def list(students, classes):
-	if students:
+	elif remove is not None:
+		print(Student.delete_student(remove))
+	elif display:
 		Student.list_students()
-	if classes:
+
+@cli.command()
+@click.option('--add', nargs=3, help="Enter class <name> <subject> <teacher> to add class")
+@click.option('--remove', type=int, help="Deletes a class from the database by its id <classID>")
+@click.option('--display', is_flag=True, help="Lists all the classes in the database")
+def classes(add, remove, display):
+	if len(add) != 0:
+		cla = Class(add[0], add[1], add[2])
+		cla.register_class()
+	elif remove is not None:
+		Class.delete_class(remove) 
+	elif display:
 		Class.list_all_classes()
 
 @cli.command()
@@ -67,6 +62,12 @@ def check(into, out):
 		print(AttendanceRegister.check_in(into[0], into[1]))
 	if len(out) != 0:
 		print(AttendanceRegister.check_out(out[0], out[1], out[2]))
+
+@cli.command()
+@click.option('--display', is_flag=True, help="Lists all the students that were checked out of class and reasons why")
+def reason(display):
+	if display:
+		AttendanceRegister.show_reasons()
 
 if __name__ == '__main__':
 	cli()

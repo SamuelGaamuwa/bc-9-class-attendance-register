@@ -18,7 +18,11 @@ class Student(object):
 
 	@staticmethod
 	def delete_student(student_id):
-		database_delete_student(student_id)
+		try:
+			database_delete_student(student_id)
+			return "Student of ID: {}, deleted".format(student_id)
+		except:
+			return "Student not in database"
 
 	@staticmethod
 	def list_students():
