@@ -1,15 +1,16 @@
-from database_connections import database_insert_class
-from database_connections import database_delete_class
-from database_connections import database_return_classes
-from database_connections import database_return_ongoing
-from database_connections import database_students_per_class
+from database_connect import database_insert_class
+from database_connect import database_delete_class
+from database_connect import database_return_classes
+from database_connect import database_return_ongoing
+from database_connect import database_students_per_class
+
+'''
+	This is class for the Classes and the operations on them,
+	including, the creation and registration of new class and 
+	addition to the database, the deletion of classes from the database as well
+'''
 
 class Class(object):
-	'''
-		This is class for the Classes and the operations on them,
-		including, the creation and registration of new class and 
-		addition to the database, the deletion of classes from the database as well
-	'''
 
 	def __init__(self, name, subject, teacher):
 		self.name = name

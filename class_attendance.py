@@ -17,7 +17,7 @@ from attendance_register import AttendanceRegister
 
 @click.group()
 def cli():
-	pass
+	print('this should work')
 
 @cli.command()
 @click.option('--student', nargs=2 , type=str, help="Enter a student's first and last name to register them")
