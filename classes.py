@@ -34,5 +34,5 @@ class Class(object):
 			if row[0] in database_return_ongoing():
 				status = 'On Going'
 				present = database_students_per_class(row[0])
-			print("{} {} {} {} {} {}".format(str(row[0]).ljust(10), row[1].ljust(15), row[2].ljust(15), row[3].ljust(15), status.ljust(10), present.ljust(10)))
+			print("{} {} {} {} {} {}".format(str(row[0]).ljust(10), row[1].ljust(15), row[2].ljust(15), row[3].ljust(15), status.ljust(10), str(present).ljust(10)))
 

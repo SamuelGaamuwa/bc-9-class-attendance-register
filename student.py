@@ -29,5 +29,4 @@ class Student(object):
 			if row[0] in database_return_inclass():
 				status = 'In Class'
 			print("{} {} {} {}".format(str(row[0]).ljust(15), row[1].ljust(20), row[2].ljust(20), status.ljust(15)))
-
-Student.list_students()				
+				

@@ -74,6 +74,14 @@ def database_return_reasons():
 		results.append((row.student_id, row.class_id, row.day, row.reason))
 	return results
 
+def database_students_per_class(class_id):
+	rows = session.query(Inclass).all()
+	count = 0
+	for row in rows:
+		if row.id == class_id:
+			count = count + 1
+	return count
+
 def database_delete_student(student_id):
 	session.query(Student).filter_by(id=student_id).delete()
 	session.commit()
@@ -90,3 +98,8 @@ def database_delete_inclass(istudent_id, iclass_id):
 	session.query(Inclass).filter_by(student_id=istudent_id, class_id=iclass_id).delete()
 	session.commit()
 
+def database_delete_class_students(sclass_id):
+	session.query(Inclass).filter_by(class_id=sclass_id).delete()
+	session.commit()
+
+print(database_return_inclass())
