@@ -13,7 +13,9 @@ The Class Attendance Register is command line application built with python
 ## Dependencies
  * The application is built mainly using 
  	* SQLAlchemy for database creation and interactions
- 	* **[Click(Python)](https://click.pocoo.org/5/) for command line interactions and display
+ 	* **[Click(Python)](https://click.pocoo.org/5/)** for command line interactions and display
+ 	* **[PyFiglet](https://pypi.python.org/pypi/pyfiglet)** for font styling
+ 	* **[Colorama](https://pypi.python.org/pypi/colorama)** for text color
  	* Python as the programming language bringing all of it together
 
  ## Installation and setup
@@ -23,7 +25,7 @@ The Class Attendance Register is command line application built with python
  	* **It is advisable that you create a virtual environment** to install the application in
  	* This is because the application may download dependencies that may alter your environment settings
  	* **[Virtualenv](https://virtualenv.pypa.io/en/stable/)** is the recommended option in this case
- 	* Once in the files directory, enter `<pip install .>` in the terminal to start installation
- *Once installed, type in `<class_attendance --help>` to get information on how to continue
+ 	* Once in the files directory, enter `pip install .` in the terminal to start installation
+ *Once installed, type in `class_attendance start` to get information on how to continue
 
  __*Enjoy the Application, Power to Python*__
