@@ -50,6 +50,8 @@ class AttendanceRegister(object):
 	#method to check student into a particular class
 		if student_id in database_return_inclass():
 			return "Student already attending class"
+		elif class_id not in database_return_ongoing():
+			return "Class is not ongoing"
 		for dataset in database_return_students():
 			if student_id in dataset:
 				print(student_id)
