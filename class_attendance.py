@@ -1,5 +1,11 @@
 import click
 
+from pyfiglet import Figlet
+from colorama import Fore
+from colorama import Back
+from colorama import Style
+from colorama import init
+
 from student import Student  
 from classes import Class
 from attendance_register import AttendanceRegister
@@ -82,6 +88,20 @@ def check(into, out):
 def reason(display):
 	if display:
 		AttendanceRegister.show_reasons()
+
+@cli.command()
+def start():
+	init(autoreset=True)
+	font = Figlet(font='doubleshorts')
+	print(Fore.CYAN +font.renderText("CLASS ATTENDANCE REGISTER"))
+	print("="*60)
+	print(Fore.YELLOW + "\nWelcome to Class Attendance Register, a few commands below to help you on your way\n\n")
+	print("student: For operations on students including, adding and removing students, and listing all students\n")
+	print("classes: For operations on classes including, adding and removing classes, and listing all classes\n")
+	print("log: For logging the start and end of classes\n")
+	print("check: For checking students in and out of classes\n")
+	print("reason: For displaying students that were checked out of class for various reasons\n\n")
+	print(Fore.YELLOW + "FOR MORE INFORMATION ON EACH COMMAND USE class_attendance <command> --help")
 
 if __name__ == '__main__':
 	cli()
